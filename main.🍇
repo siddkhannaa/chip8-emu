@@ -1,0 +1,266 @@
+📦 files 🏠
+
+🐇 🎱 🍇
+    💭 registers
+    🖍🆕 V 🍨🐚🔢🍆 ⬅️ 🆕 🍨 🐚🔢🍆 0 0x10❗️
+    🖍🆕 PC 🔢 ⬅️ 0
+    🖍🆕 I  🔢 ⬅️ 0
+
+    🖍🆕 opcode 🔢 ⬅️ 0
+
+    💭 memory
+    💭 4096 (0x1000) bytes of memory
+    💭 program begins at 512 (0x200)
+    💭 the 96 bytes (0xEA0-0xEFF) for the call stack, internal use, and other variables
+    💭 uppermost 256 bytes (0xF00-0xFFF) for display refresh
+    🖍🆕 memory 🍨🐚💧🍆 ⬅️ 🆕 🍨 🐚💧🍆 0 0x1000❗️ 
+
+    💭 writing file to memory
+    ❗ 💋 filename 🔡 🍇
+        🍺🆕📄▶️📜 filename❗ ➡️ rom
+
+        0 ➡️ 🖍🆕 i
+        👍 ➡️ 🖍🆕 loop
+        🔁 loop 🍇
+            😀🔤🧲i🧲🔤❗
+            🔛rom i❗️
+            🆗 bindata 📓rom 1❗ 🍇
+                🐽bindata 0❗ ➡️ 🐽memory 🤜0x200➕i🤛❗
+                i ⬅️➕ 1
+            🍉
+            🙅 error 🍇
+                👎 ➡️ 🖍 loop
+                🚪rom❗
+            🍉
+        🍉
+        
+        💭 🐽memory 0x205❗ ➡️ hello
+        💭 💭 🐽 memory 0x200❗
+
+        💭 😀 🔤🧲hello🧲🔤❗
+    🍉
+
+    💭 run
+    ❗🏃‍♀️🍇
+        0x200 ➡️ PC
+
+        👍 ➡️ 🖍🆕 loop
+        🔁 loop 🍇
+            🐽memory PC❗ ➡️ opcodeLow
+            🐽memory 🤜PC➕1🤛❗ ➡️ opcodeHigh
+
+            🤜opcodeHigh👈8🤛➕opcodeLow ➡️ opcode
+            
+            ⚙❗
+        🍉
+    🍉
+
+    💭 decode opcodes
+    ❗ ⚙ 🍇
+        💭 most significant nibble 😳
+        opcode👉12 ➡️ MSN
+
+        ↪️ MSN 🙌 0x0 🍇
+            💭 least significant byte (boon)
+            opcode🚮0x100 ➡️ LSB
+            ↪️ LSB 🙌 0xE0 🍇
+                💭 clear the display
+            🍉
+            🙅↪️ MSN 🙌 0xEE 🍇
+                💭 return from a sybroutine
+            🍉
+            🙅 🍇
+                😀🔤real bad has happen 😱 0x0XYZ🔤❗
+            🍉
+        🍉
+        🙅↪️ MSN 🙌 0x1 🍇
+            💭 jump to location NNN
+        🍉
+        🙅↪️ MSN 🙌 0x2 🍇
+            💭 call subrouting at location NNN
+        🍉
+        🙅↪️ MSN 🙌 0x3 🍇
+            💭 skip next instruction if Vx == NN
+        🍉
+        🙅↪️ MSN 🙌 0x4 🍇
+            💭 skip next instruction if Vx != NN
+        🍉
+        🙅↪️ MSN 🙌 0x5 🍇
+            💭 skip next instruction if Vx == Vy
+        🍉
+        🙅↪️ MSN 🙌 0x6 🍇
+            💭 write Vx = NN
+        🍉
+        🙅↪️ MSN 🙌 0x7 🍇
+            💭 write Vx += NN
+        🍉
+        🙅↪️ MSN 🙌 0x8 🍇
+            💭 least significant nibble (boon)
+            opcode🚮0x10 ➡️ LSN
+            
+            ↪️ LSN 🙌 0x0 🍇
+                💭 set Vx to Vy
+
+            🍉
+
+            🙅↪️ LSN 🙌 0x1 🍇
+                💭 bitwise OR
+
+            🍉
+            
+            🙅↪️ LSN 🙌 0x2 🍇
+                💭 bitwise AND
+
+            🍉
+
+            🙅↪️ LSN 🙌 0x3 🍇
+                💭 bitwise XOR
+
+            🍉
+
+            🙅↪️ LSN 🙌 0x4 🍇
+                💭 add Vy to Vx: Vx += Vy
+
+            🍉
+
+            🙅↪️ LSN 🙌 0x5 🍇
+                💭 sub Vy from Vx: Vx -= Vy
+
+            🍉
+            
+            🙅↪️ LSN 🙌 0x6 🍇
+                💭 store LSB of Vx in Vf then shift Vx to right by 1
+
+            🍉
+
+            🙅↪️ LSN 🙌 0x7 🍇
+                💭 Vx = Vy - Vx, Vf is set t o0 when there's a borrow and 1 when there isn't
+
+            🍉
+
+            🙅↪️ LSN 🙌 0xE 🍇
+                💭 store MSB of Vx in Vf then shift Vx to left by 1
+
+            🍉
+
+            🙅 🍇
+                💭 bad
+                😀🔤real bad has happen 0x8XYZ🔤❗
+            🍉
+        🍉
+        🙅↪️ MSN 🙌 0x9 🍇
+            💭 skip next instruction if Vx != Vy
+        🍉
+        🙅↪️ MSN 🙌 0xA 🍇
+            💭 set I = NNN
+        🍉
+        🙅↪️ MSN 🙌 0xB 🍇
+            💭  jump to location NNN + V0
+        🍉
+        🙅↪️ MSN 🙌 0xC 🍇
+            💭  set Vx = random byte AND NN
+        🍉
+        🙅↪️ MSN 🙌 0xD 🍇
+            💭 bro tf is this
+        🍉
+        🙅↪️ MSN 🙌 0xE 🍇
+            💭 least significant byte (boon)
+            opcode🚮0x100 ➡️ LSB
+            
+            💭 skip next instruction if key with the value of Vx is pressed
+            ↪️ LSB 🙌 0x99 🍇
+
+            🍉
+
+            💭 skip next instruction if key with value of Vx is not pressed
+            🙅↪️ LSB 🙌 0xA1 🍇
+
+            🍉
+            🙅 🍇
+                😀🔤real bad has happen 0xEXYZ🔤❗
+            🍉
+        🍉
+        🙅↪️ MSN 🙌 0xF 🍇
+            💭 least significant byte (boon)
+            opcode🚮0x100 ➡️ LSB
+            
+            💭 set Vx = delay timer val
+            ↪️ LSB 🙌 0x07 🍇
+                
+            🍉
+
+            💭 wait for keypress and store the value in Vx
+            🙅↪️ LSB 🙌 0x0A 🍇
+
+            🍉
+
+            💭 set delay timer = Vx
+            🙅↪️ LSB 🙌 0x15 🍇
+
+            🍉
+
+            💭 set sound timer = Vx
+            🙅↪️ LSB 🙌 0x18 🍇
+
+            🍉
+
+            💭 set I = I + Vx
+            🙅↪️ LSB 🙌 0x1E 🍇
+
+            🍉
+
+            💭 set I = location of sprite for digit Vx
+            🙅↪️ LSB 🙌 0x29 🍇
+
+            🍉
+
+            💭 ???
+            🙅↪️ LSB 🙌 0x33 🍇
+
+            🍉
+
+            💭 store registers V0 through Vx in memory starting at location I
+            🙅↪️ LSB 🙌 0x55 🍇
+
+            🍉
+
+            💭 read registers V0 through Vx from memory starting at location I
+            🙅↪️ LSB 🙌 0x65 🍇
+
+            🍉
+
+            🙅 🍇
+                😀🔤real bad has happen 0xFXYZ🔤❗
+            🍉
+        🍉
+        🙅 🍇
+            😀🔤real bad has happen 0xWXYZ🔤❗
+        🍉
+    🍉
+
+    💭 moob boon (translation: constructor)
+    🆕 🍇 🍉
+🍉
+
+🏁 🍇
+
+    🆕🎱❗ ➡️ chip8 
+
+    💋chip8 🔤./roms/Pong (alt).ch8🔤❗
+
+
+    💭 💭 display in terminal
+    💭 🆕 🍨 🐚🔡🍆 🔤██🔤 64 ❗️ ➡️ line
+    💭 🆕 🍨 🐚🍨🐚🔡🍆🍆 line 32 ❗️ ➡️ 🖍🆕box
+
+    💭 💭 🔤  🔤 ➡️ 🐽🐽box 2❗ 2❗ modify pixels
+
+    💭 🔂 line box 🍇
+    💭     🔂 char line 🍇
+    💭         👄 char❗️
+    💭     🍉
+    💭     😀 🔤🔤❗️
+    💭 🍉
+
+💭   🕴🐇💻 🔤clear🔤❗
+🍉
