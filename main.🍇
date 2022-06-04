@@ -60,6 +60,13 @@
         💭 most significant nibble 😳
         opcode👉12 ➡️ MSN
 
+        🤜opcode 👉8🤛 🚮 0x10 ➡️ X
+        🤜opcode 👉4🤛 🚮 0x10 ➡️ Y
+        
+        opcode🚮 0x1000 ➡️ NNN
+        opcode🚮 0x100 ➡️ NN
+        opcode🚮 0x10 ➡️ N
+
         ↪️ MSN 🙌 0x0 🍇
             💭 least significant byte (boon)
             opcode🚮0x100 ➡️ LSB
@@ -67,80 +74,102 @@
                 💭 clear the display
             🍉
             🙅↪️ MSN 🙌 0xEE 🍇
-                💭 return from a sybroutine
+                💭 return from a subroutine
             🍉
             🙅 🍇
                 😀🔤real bad has happen 😱 0x0XYZ🔤❗
             🍉
         🍉
+        
         🙅↪️ MSN 🙌 0x1 🍇
             💭 jump to location NNN
+            NNN ➡️ PC
         🍉
+        
         🙅↪️ MSN 🙌 0x2 🍇
-            💭 call subrouting at location NNN
+            💭 call subroutine at location NNN
         🍉
+        
         🙅↪️ MSN 🙌 0x3 🍇
             💭 skip next instruction if Vx == NN
+            ↪️ 🐽V X❗ 🙌 NN 🍇
+                PC➕1 ➡️ PC
+            🍉
         🍉
+        
         🙅↪️ MSN 🙌 0x4 🍇
             💭 skip next instruction if Vx != NN
+            ↪️ ❎🐽V X❗ 🙌 NN❗ 🍇
+                PC➕1 ➡️ PC
+            🍉
         🍉
+        
         🙅↪️ MSN 🙌 0x5 🍇
             💭 skip next instruction if Vx == Vy
+            ↪️ 🐽V X❗ 🙌 🐽V Y❗ 🍇
+                PC➕1 ➡️ PC
+            🍉
         🍉
+        
         🙅↪️ MSN 🙌 0x6 🍇
             💭 write Vx = NN
+            NN ➡️ 🐽V X❗
         🍉
+        
         🙅↪️ MSN 🙌 0x7 🍇
             💭 write Vx += NN
+            🐽V X❗➕NN ➡️ 🐽V X❗
         🍉
+
         🙅↪️ MSN 🙌 0x8 🍇
             💭 least significant nibble (boon)
             opcode🚮0x10 ➡️ LSN
             
             ↪️ LSN 🙌 0x0 🍇
                 💭 set Vx to Vy
-
+                🐽V Y❗ ➡️ 🐽V X❗
             🍉
 
             🙅↪️ LSN 🙌 0x1 🍇
-                💭 bitwise OR
-
+                💭 set Vx to Vx OR Vy (bitwise OR)
+                🐽V X❗ 💢 🐽V Y❗ ➡️ 🐽V X❗
             🍉
             
             🙅↪️ LSN 🙌 0x2 🍇
-                💭 bitwise AND
-
+                💭 set Vx to Vx AND Vy (bitwise AND)
+                🐽V X❗ ⭕ 🐽V Y❗ ➡️ 🐽V X❗
             🍉
 
             🙅↪️ LSN 🙌 0x3 🍇
-                💭 bitwise XOR
-
+                💭 set Vx to Vx XOR Vy (bitwise XOR)
+                🐽V X❗ ❌ 🐽V Y❗ ➡️ 🐽V X❗
             🍉
 
             🙅↪️ LSN 🙌 0x4 🍇
                 💭 add Vy to Vx: Vx += Vy
-
+                🐽V X❗ ⬅️➕ 🐽V Y❗
             🍉
 
             🙅↪️ LSN 🙌 0x5 🍇
                 💭 sub Vy from Vx: Vx -= Vy
-
+                🐽V X❗ ⬅️➖ 🐽V Y❗
             🍉
             
             🙅↪️ LSN 🙌 0x6 🍇
                 💭 store LSB of Vx in Vf then shift Vx to right by 1
-
+                🐽V X❗ 🚮 0x100
+                🐽V X❗👉1 ➡️ 🐽V X❗
             🍉
 
             🙅↪️ LSN 🙌 0x7 🍇
                 💭 Vx = Vy - Vx, Vf is set t o0 when there's a borrow and 1 when there isn't
-
+                🐽V Y❗ ➖ 🐽V X❗ ➡️ 🐽V X❗
             🍉
 
             🙅↪️ LSN 🙌 0xE 🍇
                 💭 store MSB of Vx in Vf then shift Vx to left by 1
-
+                🐽V X❗👉15 ➡️ 🐽V 0xF❗
+                🐽V X❗👈1 ➡️ 🐽V X❗
             🍉
 
             🙅 🍇
@@ -148,21 +177,35 @@
                 😀🔤real bad has happen 0x8XYZ🔤❗
             🍉
         🍉
+
         🙅↪️ MSN 🙌 0x9 🍇
             💭 skip next instruction if Vx != Vy
+            ↪️ ❎🐽V X❗ 🙌 🐽V Y❗ 🍇
+                PC ⬅️➕ 1
+            🍉
         🍉
+
         🙅↪️ MSN 🙌 0xA 🍇
             💭 set I = NNN
+            I ⬅️ NNN
         🍉
+        
         🙅↪️ MSN 🙌 0xB 🍇
             💭  jump to location NNN + V0
+            PC ⬅️ NNN ➕ 🐽V 0x0❗
         🍉
+
         🙅↪️ MSN 🙌 0xC 🍇
             💭  set Vx = random byte AND NN
+            🆕🎰 RNG
+            🔢RNG -128 127❗️ ➡️ rb
+            PC ⬅️ rb ⭕ NN
         🍉
+        
         🙅↪️ MSN 🙌 0xD 🍇
-            💭 bro tf is this
+            💭 has to do with drawing / display
         🍉
+        
         🙅↪️ MSN 🙌 0xE 🍇
             💭 least significant byte (boon)
             opcode🚮0x100 ➡️ LSB
@@ -184,7 +227,7 @@
             💭 least significant byte (boon)
             opcode🚮0x100 ➡️ LSB
             
-            💭 set Vx = delay timer val
+            💭 set Vx = delay timer
             ↪️ LSB 🙌 0x07 🍇
                 
             🍉
@@ -206,7 +249,7 @@
 
             💭 set I = I + Vx
             🙅↪️ LSB 🙌 0x1E 🍇
-
+                I➕🐽V X❗ ➡️ I
             🍉
 
             💭 set I = location of sprite for digit Vx
@@ -221,12 +264,17 @@
 
             💭 store registers V0 through Vx in memory starting at location I
             🙅↪️ LSB 🙌 0x55 🍇
-
+                🔂 i 🆕⏩ 0 X❗ 🍇
+                    🤜🐽memory 🤜I➕i✖2➕1🤛❗👈8🤛 ➕ 🐽memory 🤜I➕i✖2🤛❗ ➡️ 🐽V i❗
+                🍉
             🍉
 
             💭 read registers V0 through Vx from memory starting at location I
             🙅↪️ LSB 🙌 0x65 🍇
-
+                🔂 i 🆕⏩ 0 X❗ 🍇
+                    🐽V i❗🚮0x100 ➡️ 🐽memory 🤜I➕i✖2🤛❗
+                    🐽V i❗👉8 ➡️ 🐽memory 🤜I➕i✖2➕1🤛❗
+                🍉
             🍉
 
             🙅 🍇
