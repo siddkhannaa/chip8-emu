@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <unistd.h>  /* only for sleep() */
 // #include <ctime>
 
 #include <emojicode/runtime/Runtime.h>
@@ -15,4 +16,8 @@ extern "C" runtime::Integer getTime(runtime::ClassInfo*) {
 
     return output;
     // std::cout << "yo" << std::endl;
+}
+
+extern "C" void chill(runtime::ClassInfo*, runtime::Integer time) {
+    usleep(time);
 }

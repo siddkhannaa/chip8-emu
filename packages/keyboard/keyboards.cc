@@ -17,8 +17,10 @@
 
 #include <ncurses.h>
 #include <unistd.h>  /* only for sleep() */
+#include <string>
 
 #include <emojicode/runtime/Runtime.h>
+#include <emojicode/s/String.h>
 
 int kbhit(void) {
     int ch = getch();
@@ -30,43 +32,6 @@ int kbhit(void) {
         return 0;
     }
 }
-
-// runtime::Boolean keyToASCII(runtime::Boolean key) {
-//     switch ((uint64_t)key) {
-//         case 0x0:
-//             return 120;
-//         case 0x1:
-//             return 49;
-//         case 0x2:
-//             return 50;
-//         case 0x3: 
-//             return 51;
-//         case 0x4:
-//             return 113;
-//         case 0x5:
-//             return 119;
-//         case 0x6:
-//             return 101;
-//         case 0x7:
-//             return 97;
-//         case 0x8:
-//             return 115;
-//         case 0x9:
-//             return 100;
-//         case 0xA:
-//             return 122;
-//         case 0xB:
-//             return 99;
-//         case 0xC:
-//             return 52;
-//         case 0xD:
-//             return 114;
-//         case 0xE:
-//             return 102;
-//         case 0xF:
-//             return 118;
-//     }
-// }
 
 runtime::Integer ASCIIToKey(runtime::Integer ASCII) {
     switch ((uint64_t)ASCII) {
@@ -113,6 +78,10 @@ extern "C" void kbSetup(runtime::ClassInfo*) {
     scrollok(stdscr, TRUE);
 }
 
+extern "C" void kbEnd(runtime::ClassInfo*) {
+    endwin();
+}
+
 extern "C" runtime::Boolean checkPressed(runtime::ClassInfo*, runtime::Integer target) {
     if (kbhit()) {
         runtime::Integer key = ASCIIToKey((runtime::Integer)getch());
@@ -139,4 +108,21 @@ extern "C" runtime::Integer waitForKey(runtime::ClassInfo*) {
             sleep(1);
         }
     }
+}
+
+extern "C" void writeToBuffer(runtime::ClassInfo*, s::String *chars) {
+    std::string cppString = chars->stdString();
+    printw(cppString.c_str());
+}
+
+extern "C" void newline(runtime::ClassInfo*) {
+    printw("\n");
+}
+
+extern "C" void displayBuffer(runtime::ClassInfo*) {
+    refresh();
+}
+
+extern "C" void clearDisplay(runtime::ClassInfo*) {
+    clear();
 }
