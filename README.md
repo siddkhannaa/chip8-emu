@@ -3,11 +3,7 @@
 moob boon
 
 # 🔨 Setup
-<<<<<<< HEAD
 emojicode is wack and doesn't work on windows so u have to be running macOS or Linux <br>
-=======
-emojicode is wack and doesn't work on windows so u have to be running the emulator on macOS or Linux <br>
->>>>>>> b005e2defd67a2097a361e7e8b2097015e4f404c
 
 make sure you have ncurses and tinfo installed on your machine: <br>
 ```
