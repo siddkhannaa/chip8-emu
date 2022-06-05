@@ -4,8 +4,6 @@ moob boon
 # 🔨 Setup
 emojicode is wack and doesn't work on windows so u have to be running macOS or Linux <br>
 
-install the installer from the [Releases](https://github.com/siddkhannaa/chip8-emu/releases) page <br>
-
 make sure you have ncurses and tinfo installed on your machine: <br>
 ```
 sudo apt install libncurses5-dev
