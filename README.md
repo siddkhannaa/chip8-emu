@@ -1,5 +1,5 @@
 # 🎱 Emojicode CHIP-8️⃣ Emulator
-![chip8logo_console](img/chip8.png)
+![chip8logo_console](img/chip8.png) <br>
 moob boon
 
 # 🔨 Setup
