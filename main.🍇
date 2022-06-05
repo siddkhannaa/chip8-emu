@@ -294,35 +294,24 @@
         🙅↪️ MSN 🙌 0xD 🍇
             💭 has to do with drawing / display
             N ➡️ height
-            🐽V X❗ ➡️ rX
-            🐽V Y❗ ➡️ rY
+            🐽V X❗🚮64 ➡️ rX
+            🐽V Y❗🚮32 ➡️ rY
 
             0 ➡️ 🐽V 0xF❗
 
-            🔂 yy 🆕⏩ 0 height❗ 🍇
+            0 ➡️ 🖍🆕yy
+            rY➕yy ➡️ 🖍🆕y
+
+            🔁 yy ◀ height 🤝 y ◀ 32 🍇
+                0 ➡️ 🖍🆕xx
+                rX➕xx ➡️ 🖍🆕x
                 🐽memory 🤜I➕yy🤛❗ ➡️ 🖍🆕pixel
-                🔂 xx 🆕⏩ 0 8❗ 🍇
-                    💭 🔤  🔤 ➡️ 🐽🐽display line❗ char❗
+                🔁 xx ◀ 8 🤝 x ◀ 64  🍇
                     ↪️ ❎🤜pixel ⭕ 0x80🤛 🙌 0❗🍇
-                        rX➕xx ➡️ 🖍🆕x
-                        rY➕yy ➡️ 🖍🆕y
                         💭 ▶🙌
                         💭 ◀🙌
-                        
-                        ↪️ x ▶🙌 64 🍇
-                            x➖64 ➡️ 🖍x
-                        🍉
-                        ↪️ x ◀ 0 🍇
-                            x➕64 ➡️ 🖍x
-                        🍉
 
-                        ↪️ y ▶🙌 32 🍇
-                            y➖32 ➡️ 🖍y
-                        🍉
-                        ↪️ y ◀ 0 🍇
-                            y➕32 ➡️ 🖍y
-                        🍉
-
+                        💭 😀 🔤x: 🧲x🧲, y: 🧲y🧲🔤❗️
                         ↪️ 🐽🐽display y❗ x❗ 🙌 🔤88🔤 🍇
                             1 ➡️ 🐽V 0xF❗
                             🔤  🔤 ➡️ 🐽🐽display y❗ x❗
@@ -333,7 +322,13 @@
                     🍉
 
                     pixel👈1 ➡️ 🖍pixel
+
+                    1➕xx ➡️ 🖍xx
+                    rX➕xx ➡️ 🖍x
                 🍉
+
+                1➕yy ➡️ 🖍yy
+                rY➕yy ➡️ 🖍y
             🍉
         🍉
         
