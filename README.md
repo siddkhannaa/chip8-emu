@@ -1,6 +1,7 @@
 # 🎱 Emojicode CHIP-8️⃣ Emulator
 ![chip8logo_console](img/chip8.png) <br>
-moob boon
+moob boon <br>
+all 35 opcodes are implemented! (wow)
 
 # 🔨 Setup
 emojicode is wack and doesn't work on windows so u have to be running macOS or Linux <br>
