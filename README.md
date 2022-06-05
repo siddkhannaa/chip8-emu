@@ -7,9 +7,9 @@ emojicode is wack and doesn't work on windows so u have to be running macOS or L
 install the installer from the [Releases](https://github.com/siddkhannaa/chip8-emu/releases) page <br>
 
 make sure you have ncurses and tinfo installed on your machine: <br>
-`sudo apt install libncurses5-dev` <br>
-`sudo apt install libcurseesw5-dev` <br>
-`sudo apt install libtinfo-dev` <br>
+`sudo apt install libncurses5-dev
+sudo apt install libcurseesw5-dev
+sudo apt install libtinfo-dev`
 
 ensure you extract the archive files (`.a` files) into  `packages/keyboard/ncurses` and `packages/keyboard/tinfo` for each respective library. This can be done using the following commands: <br>
 `$ chip8-emu git:(master) ✗ ar x /usr/lib/x86_64-linux-gnu/libncurses.a` <br>           
