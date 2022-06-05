@@ -15,7 +15,7 @@ sudo apt install libtinfo-dev
 
 ensure you extract the archive files (`.a` files) into  `packages/keyboard/ncurses` and `packages/keyboard/tinfo` for each respective library. This can be done using the following commands: <br>
 ```
-$ chip8-emu git:(master) ✗ ar x /usr/lib/x86_64-linux-gnu/libncurses.a` <br>           
-$ chip8-emu git:(master) ✗ ar x /usr/lib/x86_64-linux-gnu/libtinfo.a` <br>
+$ ar x /usr/lib/x86_64-linux-gnu/libncurses.a` <br>           
+$ ar x /usr/lib/x86_64-linux-gnu/libtinfo.a` <br>
 ```
 (these steps are neccessary so that we can get keyboard input)
