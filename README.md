@@ -2,7 +2,7 @@
 moob boon
 
 # 🔨 Setup
-emojicode is wack and doesn't work on windows so u have to be running macOS or Linux <br>
+emojicode is wack and doesn't work on windows so u have to be running the emulator on macOS or Linux <br>
 
 make sure you have ncurses and tinfo installed on your machine: <br>
 ```
