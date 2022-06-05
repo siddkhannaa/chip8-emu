@@ -1,4 +1,40 @@
 📦 files 🏠
+📦 time 🏠
+
+💭 delay timer
+🐇 ⌛ 🍇
+    🖍🆕 val 🔢 ⬅️ 0
+    🖍🆕 prevTime 🔢 ⬅️ 🤜⌚🐇⏳❗️✖3➗50🤛
+
+    💭 set time
+    ❗🤬 newtime 🔢 🍇
+        newtime ➡️ 🖍 val
+    🍉
+
+    💭 ❗ 📥 ➡️ 🔢 🍇
+    💭     ↩️val
+    💭 🍉
+
+    💭 method to actually time
+    ❗ 😴 ➡️ 🔢 🍇
+        💭 get the curTime from c++
+        ⌚🐇⏳❗️✖3➗50 ➡️ curTime
+
+        curTime➖prevTime ➡️ delta
+
+        val➖delta ➡️ 🖍 val
+
+        ↪️ 0 ▶ val🍇
+            0 ➡️ 🖍 val
+        🍉
+
+        curTime ➡️ 🖍 prevTime
+
+        ↩️ val
+    🍉
+
+    🆕 🍇 🍉
+🍉
 
 🐇 🎱 🍇
     💭 registers
@@ -42,19 +78,18 @@
 
     💭 run
     ❗🏃‍♀️🍇
-        0x200 ➡️ PC
+        0x200 ➡️ 🖍 PC
 
         👍 ➡️ 🖍🆕 loop
         🔁 loop 🍇
-            🐽memory PC❗ ➡️ opcodeLow
-            🐽memory 🤜PC➕1🤛❗ ➡️ opcodeHigh
+            🔢 🐽memory PC❗❗ ➡️ opcodeLow
+            🔢 🐽memory 🤜PC➕1🤛❗❗ ➡️ opcodeHigh
 
-            🤜opcodeHigh👈8🤛➕opcodeLow ➡️ opcode
+            🤜opcodeHigh👈8🤛➕opcodeLow ➡️ 🖍 opcode
             
             ⚙❗
         🍉
     🍉
-
     💭 decode opcodes
     ❗ ⚙ 🍇
         💭 most significant nibble 😳
@@ -83,7 +118,7 @@
         
         🙅↪️ MSN 🙌 0x1 🍇
             💭 jump to location NNN
-            NNN ➡️ PC
+            NNN ➡️ 🖍 PC
         🍉
         
         🙅↪️ MSN 🙌 0x2 🍇
@@ -93,21 +128,21 @@
         🙅↪️ MSN 🙌 0x3 🍇
             💭 skip next instruction if Vx == NN
             ↪️ 🐽V X❗ 🙌 NN 🍇
-                PC➕1 ➡️ PC
+                PC➕1 ➡️ 🖍 PC
             🍉
         🍉
         
         🙅↪️ MSN 🙌 0x4 🍇
             💭 skip next instruction if Vx != NN
             ↪️ ❎🐽V X❗ 🙌 NN❗ 🍇
-                PC➕1 ➡️ PC
+                PC➕1 ➡️ 🖍 PC
             🍉
         🍉
         
         🙅↪️ MSN 🙌 0x5 🍇
             💭 skip next instruction if Vx == Vy
             ↪️ 🐽V X❗ 🙌 🐽V Y❗ 🍇
-                PC➕1 ➡️ PC
+                PC➕1 ➡️ 🖍 PC
             🍉
         🍉
         
@@ -147,12 +182,12 @@
 
             🙅↪️ LSN 🙌 0x4 🍇
                 💭 add Vy to Vx: Vx += Vy
-                🐽V X❗ ⬅️➕ 🐽V Y❗
+                🐽V X❗➕ 🐽V Y❗ ➡️ 🐽V X❗
             🍉
 
             🙅↪️ LSN 🙌 0x5 🍇
                 💭 sub Vy from Vx: Vx -= Vy
-                🐽V X❗ ⬅️➖ 🐽V Y❗
+                🐽V X❗➖ 🐽V Y❗➡️ 🐽V X❗
             🍉
             
             🙅↪️ LSN 🙌 0x6 🍇
@@ -180,26 +215,26 @@
 
         🙅↪️ MSN 🙌 0x9 🍇
             💭 skip next instruction if Vx != Vy
-            ↪️ ❎🐽V X❗ 🙌 🐽V Y❗ 🍇
-                PC ⬅️➕ 1
+            ↪️ ❎🐽V X❗ 🙌 🐽V Y❗❗ 🍇
+                PC ➕ 1 ➡️ 🖍 PC
             🍉
         🍉
 
         🙅↪️ MSN 🙌 0xA 🍇
             💭 set I = NNN
-            I ⬅️ NNN
+            NNN ➡️ 🖍 I
         🍉
         
         🙅↪️ MSN 🙌 0xB 🍇
             💭  jump to location NNN + V0
-            PC ⬅️ NNN ➕ 🐽V 0x0❗
+            NNN ➕ 🐽V 0x0❗ ➡️ 🖍 PC
         🍉
 
         🙅↪️ MSN 🙌 0xC 🍇
             💭  set Vx = random byte AND NN
-            🆕🎰 RNG
+            🆕🎰❗ ➡️ RNG
             🔢RNG -128 127❗️ ➡️ rb
-            PC ⬅️ rb ⭕ NN
+            rb ⭕ NN ➡️ 🖍 PC
         🍉
         
         🙅↪️ MSN 🙌 0xD 🍇
@@ -224,12 +259,15 @@
             🍉
         🍉
         🙅↪️ MSN 🙌 0xF 🍇
-            💭 least significant byte (boon)
+            💭 least significant byte (moob boon)
             opcode🚮0x100 ➡️ LSB
             
             💭 set Vx = delay timer
             ↪️ LSB 🙌 0x07 🍇
+                💭 🆕⌛ delay_timer
+                💭 ⏳delay_timer
                 
+
             🍉
 
             💭 wait for keypress and store the value in Vx
@@ -249,7 +287,7 @@
 
             💭 set I = I + Vx
             🙅↪️ LSB 🙌 0x1E 🍇
-                I➕🐽V X❗ ➡️ I
+                I➕🐽V X❗ ➡️ 🖍 I
             🍉
 
             💭 set I = location of sprite for digit Vx
@@ -265,15 +303,15 @@
             💭 store registers V0 through Vx in memory starting at location I
             🙅↪️ LSB 🙌 0x55 🍇
                 🔂 i 🆕⏩ 0 X❗ 🍇
-                    🤜🐽memory 🤜I➕i✖2➕1🤛❗👈8🤛 ➕ 🐽memory 🤜I➕i✖2🤛❗ ➡️ 🐽V i❗
+                    🤜🔢 🐽memory 🤜I➕i✖2➕1🤛❗❗👈8🤛 ➕ 🔢🐽memory 🤜I➕i✖2🤛❗❗ ➡️ 🐽V i❗
                 🍉
             🍉
 
             💭 read registers V0 through Vx from memory starting at location I
             🙅↪️ LSB 🙌 0x65 🍇
                 🔂 i 🆕⏩ 0 X❗ 🍇
-                    🐽V i❗🚮0x100 ➡️ 🐽memory 🤜I➕i✖2🤛❗
-                    🐽V i❗👉8 ➡️ 🐽memory 🤜I➕i✖2➕1🤛❗
+                    💧🐽V i❗🚮0x100❗ ➡️ 🐽memory 🤜I➕i✖2🤛❗
+                    💧🐽V i❗👉8❗ ➡️ 🐽memory 🤜I➕i✖2➕1🤛❗
                 🍉
             🍉
 
@@ -292,9 +330,28 @@
 
 🏁 🍇
 
-    🆕🎱❗ ➡️ chip8 
+    💭 🕘🐇🀄❗ ➡️ hello
+    💭 😀 🔤🧲hello🧲🔤❗️
 
-    💋chip8 🔤./roms/Pong (alt).ch8🔤❗
+    
+    💭 🎙🐇🐱❗️
+    💭 ⌚🐇⏳❗️✖3➗50 ➡️ boblov
+    💭 😀 🔤🧲boblov🧲🔤❗️
+
+    🆕⌛❗ ➡️ moobboon
+    🤬moobboon 500❗
+    🔂 i 🆕⏩ 0 10000000❗ 🍇🍉
+    😴moobboon❗ ➡️ ticks
+    😀 🔤🧲ticks🧲🔤❗️
+
+
+
+    💭 🆕🎱❗ ➡️ chip8 
+
+    💭 💋chip8 🔤./roms/Pong (alt).ch8🔤❗
+
+
+
 
 
     💭 💭 display in terminal
