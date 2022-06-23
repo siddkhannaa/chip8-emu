@@ -3,7 +3,7 @@ main: time keyboard
 	emojicodec main.🍇 -o ./build/main
 
 # thicc but keyboard
-keyboard: keyboardemo keyboardcc
+keyboard: keyboardemo keyboards.o
 	ar q ./packages/keyboard/libkeyboard.a ./packages/keyboard/keyboards.o
 	ar q ./packages/keyboard/libkeyboard.a $(shell find ./packages/keyboard/tinfo -type f)
 	ar q ./packages/keyboard/libkeyboard.a $(shell find ./packages/keyboard/ncurses -type f)
@@ -15,17 +15,17 @@ keyboard: keyboardemo keyboardcc
 keyboardemo:
 	emojicodec -p keyboard ./packages/keyboard/main.🍇
 
-keyboardcc:
+keyboards.o:
 	g++ -c ./packages/keyboard/keyboards.cc -o ./packages/keyboard/keyboards.o
 
 
-time: timeemo timecc
+time: timeemo times.o
 	ar q ./packages/time/libtime.a ./packages/time/times.o
 
 timeemo:
 	emojicodec -p time ./packages/time/main.🍇
 
-timecc:
+times.o:
 	g++ -c ./packages/time/times.cc -o ./packages/time/times.o
 	
 
